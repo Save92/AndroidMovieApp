@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fouriam.android.esgi.fr.filmdroid.ActorDetailFragment"
+    android:background="@color/white"
+    android:clickable="true">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/person_page_title"
+        android:id="@+id/person_page_tilteLabel"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/personNameText"
+        android:layout_below="@+id/person_page_tilteLabel"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/person_birthday"
+        android:id="@+id/personBirthdayLebel"
+        android:layout_below="@+id/personNameText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/personBirthdayText"
+        android:layout_alignTop="@+id/personBirthdayLebel"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/personBirthdayLebel"
+        android:layout_toRightOf="@+id/personBirthdayLebel"
+        android:layout_toEndOf="@+id/personBirthdayLebel"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/person_placeBirth"
+        android:id="@+id/personPlaceBithLabel"
+        android:layout_below="@+id/personBirthdayLebel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text=""
+        android:id="@+id/personPlaceBithText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/personPlaceBithLabel"
+        android:layout_toEndOf="@+id/personPlaceBithLabel"
+        android:layout_alignTop="@+id/personPlaceBithLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/person_filmography"
+        android:id="@+id/personFilmographyLabel"
+        android:layout_below="@+id/personPlaceBithText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/filmographyList"
+        android:layout_below="@+id/personFilmographyLabel"
+        android:layout_centerHorizontal="true"
+        android:fadeScrollbars="false"/>
+
+</RelativeLayout>

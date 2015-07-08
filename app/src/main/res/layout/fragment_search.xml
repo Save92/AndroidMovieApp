@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="fouriam.android.esgi.fr.filmdroid.SearchFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/home_title"
+        android:id="@+id/homeTitleTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/search_by_person"
+        android:ems="10"
+        android:id="@+id/searchByPersonText"
+        android:layout_below="@+id/homeTitleTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/search_by_title"
+        android:id="@+id/searchByTitleText"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/searchByPersonText"
+        android:layout_alignEnd="@+id/searchByPersonText"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rechercherBtn"
+        android:id="@+id/searchBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/searchByTitleText" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/films_recentBtn"
+        android:id="@+id/filmsRecentsBtn"
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/searchBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/go_favorisBtn"
+        android:id="@+id/goFavorisBtn"
+        android:layout_below="@+id/filmsRecentsBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/orLabel"
+        android:id="@+id/textView"
+        android:layout_below="@+id/searchByPersonText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/films_upcommingBtn"
+        android:id="@+id/filmsUpcommingBtn"
+        android:layout_alignTop="@+id/filmsRecentsBtn"
+        android:layout_alignRight="@+id/searchByTitleText"
+        android:layout_alignEnd="@+id/searchByTitleText"
+        android:layout_toRightOf="@+id/filmsRecentsBtn"
+        android:layout_toEndOf="@+id/filmsRecentsBtn" />
+</RelativeLayout>
