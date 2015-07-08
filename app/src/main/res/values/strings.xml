@@ -3,4 +3,62 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+
+    <!-- HOME PAGE -->
+
+
+
+    <!-- FAVORIS PAGE -->
+
+    <string name="favoris_title">Mes favoris</string>
+
+    <!-- RESULTS MOVIE PAGE -->
+
+    <string name="results_title">Résultats</string>
+    <!-- RESULTS ACTOR PAGE -->
+
+    <string name="results_person_title">Résultats des acteurs</string>
+
+    <!-- ACTOR PAGE -->
+
+    <string name="person_page_title">Fiche de :</string>
+    <string name="person_filmography">Filmographie :</string>
+    <string name="person_birthday">Date de naissance :</string>
+    <string name="person_placeBirth">Lieux de naissance :</string>
+
+
+    <!-- FILM PAGE -->
+
+    <string name="film_page_title">Fiche du film :</string>
+    <string name="film_year">Année :</string>
+    <string name="film_genre">Genre :</string>
+    <string name="film_nationnality">Nationnalité :</string>
+    <string name="film_realisator">Réalisateur :</string>
+    <string name="film_actors">Acteurs principaux :</string>
+    <string name="film_synopsis">Synopsis :</string>
+    <string name="film_addFavoriteBtn">Ajouter à mes favoris</string>
+    <string name="title_activity_favoris">FavorisActivity</string>
+
+<!-- Search Fragment-->
+    <string name="home_title">Rechercher un film</string>
+    <string name="search_by_person">Par nom de personne</string>
+    <string name="search_by_title">Par titre</string>
+    <string name="rechercherBtn">Rechercher</string>
+    <string name="films_recentBtn">Les films à l\'affiche</string>
+    <string name="films_upcommingBtn">Les films à venir</string>
+    <string name="go_favorisBtn">Voir mes favoris</string>
+    <string name="orLabel">Ou</string>
+
+
+<!-- Delete Dialog -->
+
+    <string name="deleteDialogTitle">Suppression du favoris</string>
+    <string name="deleteDialogContent">Etes vous sur de vouloir supprimer ce film?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
