@@ -1,9 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="fouriam.android.esgi.fr.filmdroid.FilmFragment"
-    android:background="@color/white"
-    android:id="@+id/backgroundBack">
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:background="@color/white"
+        android:id="@+id/backgroundBack">
 
 
         <TextView
@@ -33,9 +34,8 @@
             android:text="@string/film_year"
             android:id="@+id/filmYearLabel"
             android:layout_below="@+id/titleFilmText"
-            android:layout_alignLeft="@+id/filmGenreLabel"
-            android:layout_alignStart="@+id/filmGenreLabel"
-            android:layout_marginTop="10dp"/>
+            android:layout_toRightOf="@+id/filmRealisatorLabel"
+            android:layout_toEndOf="@+id/filmRealisatorLabel" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,12 +43,11 @@
             android:text=""
             android:id="@+id/yearText"
             android:layout_alignBottom="@+id/filmYearLabel"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:gravity="center"
             android:layout_toRightOf="@+id/filmYearLabel"
-            android:layout_toEndOf="@+id/filmYearLabel"
-            android:layout_alignTop="@+id/filmYearLabel" />
+            android:layout_alignTop="@+id/filmYearLabel"
+            android:layout_alignRight="@+id/filmsPageTitle"
+            android:layout_alignEnd="@+id/filmsPageTitle" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,9 +56,8 @@
             android:text="@string/film_genre"
             android:id="@+id/filmGenreLabel"
             android:layout_below="@+id/filmYearLabel"
-            android:layout_alignLeft="@+id/filmNationnalitylabel"
-            android:layout_alignStart="@+id/filmNationnalitylabel"
-            android:layout_marginTop="10dp"/>
+            android:layout_alignLeft="@+id/filmYearLabel"
+            android:layout_alignStart="@+id/filmYearLabel" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -78,20 +76,19 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/film_nationnality"
             android:id="@+id/filmNationnalitylabel"
-            android:layout_below="@+id/genreText"
-            android:layout_alignRight="@+id/filmsPageTitle"
-            android:layout_alignEnd="@+id/filmsPageTitle"
-            android:layout_marginTop="10dp"/>
+            android:layout_below="@+id/filmGenreLabel"
+            android:layout_alignLeft="@+id/filmGenreLabel"
+            android:layout_alignStart="@+id/filmGenreLabel" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:text=""
             android:id="@+id/nationnalityText"
+            android:layout_alignTop="@+id/filmNationnalitylabel"
+            android:layout_toRightOf="@+id/realisatorText"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/filmNationnalitylabel"
-            android:layout_alignLeft="@+id/filmNationnalitylabel"
-            android:layout_alignStart="@+id/filmNationnalitylabel" />
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:layout_width="130dp"
@@ -101,21 +98,19 @@
             android:id="@+id/filmRealisatorLabel"
             android:layout_below="@+id/nationnalityText"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="20dp" />
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
             android:id="@+id/realisatorText"
+            android:layout_alignTop="@+id/filmRealisatorLabel"
+            android:layout_toRightOf="@+id/filmRealisatorLabel"
+            android:gravity="center"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/filmRealisatorLabel"
-            android:layout_above="@+id/filmActorsLabel"
-            android:layout_toRightOf="@+id/filmRealisatorLabel"
-            android:layout_toEndOf="@+id/filmRealisatorLabel"
-            android:gravity="center"/>
+            android:layout_above="@+id/filmActorsLabel" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -133,12 +128,12 @@
             android:layout_height="35dp"
             android:text=""
             android:id="@+id/actorsText"
-            android:layout_below="@+id/filmActorsLabel"
-            android:layout_alignRight="@+id/realisatorText"
-            android:layout_alignEnd="@+id/realisatorText"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            android:layout_alignTop="@+id/filmActorsLabel"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/filmGenreLabel"
+            android:layout_toRightOf="@+id/filmGenreLabel" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -152,24 +147,27 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:text=""
             android:id="@+id/synopsisText"
-            android:layout_below="@+id/filmSynopsisLabel"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:scrollbars="vertical"
-            android:fadeScrollbars="false"/>
+            android:fadeScrollbars="false"
+            android:layout_below="@+id/actorsText"
+            android:layout_toRightOf="@+id/filmSynopsisLabel"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/film_addFavoriteBtn"
             android:id="@+id/addFavoriteBtn"
-            android:layout_below="@+id/synopsisText"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/synopsisText" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -177,10 +175,11 @@
             android:id="@+id/filmImage"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_above="@+id/filmRealisatorLabel"
-            android:layout_toStartOf="@+id/filmsPageTitle"
+            android:layout_toStartOf="@+id/realisatorText"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/filmsPageTitle" />
+            android:layout_alignBottom="@+id/nationnalityText"
+            android:layout_toLeftOf="@+id/realisatorText" />
 
 
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

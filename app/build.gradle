@@ -31,4 +31,5 @@ dependencies {
     compile 'com.getbase:floatingactionbutton:1.9.1'
     compile 'com.uwetrottmann:tmdb-java:0.9.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.inthecheesefactory.thecheeselibrary:stated-fragment-support-v4:0.9.3'
 }

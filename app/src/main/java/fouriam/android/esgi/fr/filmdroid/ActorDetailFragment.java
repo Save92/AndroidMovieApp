@@ -26,7 +26,6 @@ import fouriam.android.esgi.fr.filmdroid.entities.Movie;
 import fouriam.android.esgi.fr.filmdroid.entities.MovieResultsPage;
 import fouriam.android.esgi.fr.filmdroid.entities.Person;
 import fouriam.android.esgi.fr.filmdroid.services.DiscoverService;
-import fouriam.android.esgi.fr.filmdroid.services.MoviesService;
 import fouriam.android.esgi.fr.filmdroid.services.PeopleService;
 
 
@@ -41,12 +40,7 @@ import fouriam.android.esgi.fr.filmdroid.services.PeopleService;
 public class ActorDetailFragment extends Fragment {
 
     private static final String TAG = "DetailActorFragment";
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private Person person;
     private Toast toast;
     private ProgressDialog progress;
@@ -59,26 +53,14 @@ public class ActorDetailFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ActorDetailFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ActorDetailFragment newInstance(String param1, String param2) {
+    public static ActorDetailFragment newInstance() {
         ActorDetailFragment fragment = new ActorDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
 
     public ActorDetailFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -113,7 +95,6 @@ public class ActorDetailFragment extends Fragment {
         new getPersonFilmography().execute(person.getId());
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -155,31 +136,20 @@ public class ActorDetailFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
 
     private class getPersonDetail extends AsyncTask<Integer, Void, Person> {
         @Override
-        protected void onPreExecute() { // Actions avant d’exe la requete
+        protected void onPreExecute() {
             super.onPreExecute();
-            progress.setMessage("Loading...");
+            progress.setMessage(getActivity().getResources().getString(R.string.Loading));
             progress.show();
         }
 
         @Override
-        protected Person doInBackground(Integer... personId) { // Exe en arriere plan
+        protected Person doInBackground(Integer... personId) {
             Tmdb tmdb = new Tmdb();
             tmdb.setApiKey("4718f1a9036a1c190dad9301f401fb25");
             PeopleService peopleService = tmdb.personService();
@@ -188,7 +158,7 @@ public class ActorDetailFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(Person currentPerson) { // Action apres exe !
+        protected void onPostExecute(Person currentPerson) {
             progress.dismiss();
             personName.setText(currentPerson.getName());
             SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
@@ -200,14 +170,14 @@ public class ActorDetailFragment extends Fragment {
 
     private class getPersonFilmography extends AsyncTask<Integer, Void, MovieResultsPage> {
         @Override
-        protected void onPreExecute() { // Actions avant d’exe la requete
+        protected void onPreExecute() {
             super.onPreExecute();
-            progress.setMessage("Loading...");
+            progress.setMessage(getActivity().getResources().getString(R.string.Loading));
             progress.show();
         }
 
         @Override
-        protected MovieResultsPage doInBackground(Integer... personId) { // Exe en arriere plan
+        protected MovieResultsPage doInBackground(Integer... personId) {
             Tmdb tmdb = new Tmdb();
             tmdb.setApiKey("4718f1a9036a1c190dad9301f401fb25");
             DiscoverService discoverService = tmdb.discoverService();
@@ -216,7 +186,7 @@ public class ActorDetailFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(MovieResultsPage movies) { // Action apres exe !
+        protected void onPostExecute(MovieResultsPage movies) {
             progress.dismiss();
             populateListMovies(movies.getResults());
         }

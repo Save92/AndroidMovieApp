@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,8 +46,6 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-        // TODO Auto-generated method stub
-
         arg0.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         this.onCreate(arg0);
         Log.i("SQLite DB", "Upgrade");
@@ -58,10 +55,8 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 
     public void deleteOne(Movie movie) {
 
-        // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME, // table
-                "id_movie = ?", new String[] { String.valueOf(movie.getId()) });
+        db.delete(TABLE_NAME, "id_movie = ?", new String[] { String.valueOf(movie.getId()) });
         db.close();
         Log.i("SQLite DB : Delete : ", movie.toString());
 
@@ -69,14 +64,13 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 
     public Movie showOne(int id_movie) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME,COLONNES, " id_movie = ?",
-                new String[] { String.valueOf(id_movie) }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME,COLONNES, " id_movie = ?", new String[] { String.valueOf(id_movie) },
+                null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
         Movie movie = new Movie();
         movie.setId(Integer.parseInt(cursor.getString(2)));
         movie.setTitle(cursor.getString(1));
-        // log
         Log.i(TAG,"SQLite DB : Show one  : id=  "+id_movie +" : " +movie.getTitle());
 
         return movie;
@@ -84,8 +78,8 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 
     public boolean isInFavoris(int id_movie) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME,COLONNES, " id_movie = ?",
-                new String[] { String.valueOf(id_movie) }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME,COLONNES, " id_movie = ?", new String[] { String.valueOf(id_movie) },
+                null, null, null, null);
         if(cursor.getCount() <= 0){
             cursor.close();
             return false;
@@ -122,7 +116,6 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, movie.getTitle());
         values.put(KEY_MOVIE_ID, movie.getId());
-        // insertion
         db.insert(TABLE_NAME, null, values);
 
         db.close();

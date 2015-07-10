@@ -1,12 +1,7 @@
 package fouriam.android.esgi.fr.filmdroid;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.Bitmap;
-import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,38 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import fouriam.android.esgi.fr.filmdroid.Models.Film;
-import fouriam.android.esgi.fr.filmdroid.Models.Genre;
 import fouriam.android.esgi.fr.filmdroid.entities.CastMember;
 import fouriam.android.esgi.fr.filmdroid.entities.Credits;
 import fouriam.android.esgi.fr.filmdroid.entities.CrewMember;
 import fouriam.android.esgi.fr.filmdroid.entities.Movie;
-import fouriam.android.esgi.fr.filmdroid.entities.MovieResultsPage;
-import fouriam.android.esgi.fr.filmdroid.entities.Person;
-import fouriam.android.esgi.fr.filmdroid.entities.PersonCredits;
-import fouriam.android.esgi.fr.filmdroid.httpservice.FilmDroidService;
 import fouriam.android.esgi.fr.filmdroid.services.MoviesService;
-import fouriam.android.esgi.fr.filmdroid.services.SearchService;
 import fouriam.android.esgi.fr.filmdroid.sqlite.SQLiteDatabaseHandler;
-import fouriam.android.esgi.fr.filmdroid.utils.ErrorsHandlerUtils;
-import fouriam.android.esgi.fr.filmdroid.utils.NetworkUtils;
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 
 /**
@@ -64,10 +40,6 @@ public class FilmFragment extends Fragment {
 
 
     private static final String TAG = "FilmFragment";
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     private Movie movie;
     private TextView filmTitle;
@@ -78,11 +50,9 @@ public class FilmFragment extends Fragment {
     private TextView filmActors;
     private TextView filmSynopsis;
     private ImageView filmImage;
-    private RelativeLayout layout;
+    private String urlImage;
 
     private Movie thisMovie;
-    private ArrayList<HashMap<Integer, String>> listGenre;
-    private FilmDroidService filmDroidService;
     private Toast toast;
     private Button addFavoriteBtn;
     private SQLiteDatabaseHandler db;
@@ -91,19 +61,10 @@ public class FilmFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-//    // TODO: Rename and change types and number of parameters
-//    public static FilmFragment newInstance(String param1, String param2) {
-//        FilmFragment fragment = new FilmFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
 
     public FilmFragment() {
-        // Required empty public constructor
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,6 +85,7 @@ public class FilmFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_film, container, false);
+
         filmTitle = (TextView) view.findViewById(R.id.titleFilmText);
         filmYear = (TextView) view.findViewById(R.id.yearText);
         filmNationnality = (TextView) view.findViewById(R.id.nationnalityText);
@@ -133,8 +95,6 @@ public class FilmFragment extends Fragment {
         filmSynopsis.setMovementMethod(new ScrollingMovementMethod());
         filmGenre = (TextView) view.findViewById(R.id.genreText);
         filmImage = (ImageView) view.findViewById(R.id.filmImage);
-        layout =(RelativeLayout) view.findViewById(R.id.background);
-        //putGenreForMovie();
         addFavoriteBtn = (Button) view.findViewById(R.id.addFavoriteBtn);
         addFavoriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,19 +102,20 @@ public class FilmFragment extends Fragment {
                 if(thisMovie.getId() != null) {
 
                     db.addOne(thisMovie);
-                    toast.setText("Ajouté!");
+                    toast.setText(getActivity().getResources().getString(R.string.AddDone));
+                    addFavoriteBtn.setVisibility(View.GONE);
+
                 } else {
-                    toast.setText("Erreur lors de l'ajout du favoris");
+                    toast.setText(getActivity().getResources().getString(R.string.AddFavorisError));
                 }
                 toast.show();
 
             }
         });
+        if(db.isInFavoris(movie.getId())) {
+            addFavoriteBtn.setVisibility(View.GONE);
+        }
         goSearchMovie();
-
-
-
-        // Inflate the layout for this fragment
         return view;
     }
 
@@ -164,7 +125,6 @@ public class FilmFragment extends Fragment {
 
     public void getCast() { new getCastForMovie().execute(movie.getId());}
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -189,27 +149,21 @@ public class FilmFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
 
+
+    private void getMoviePoster(String url) {
+        Picasso.with(getActivity()).load(url).into(filmImage);
+    }
 
     private class getCastForMovie extends AsyncTask<Integer, Void, Credits> {
         @Override
         protected void onPreExecute() { // Actions avant d’exe la requete
             super.onPreExecute();
-            progress.setMessage("Loading...");
+            progress.setMessage(getActivity().getResources().getString(R.string.Loading));
             progress.show();
         }
 
@@ -243,9 +197,6 @@ public class FilmFragment extends Fragment {
                         nbRealisator++;
                     }
                 }
-
-
-
             }
 
             List<CastMember> cast = currentCast.cast;
@@ -272,7 +223,7 @@ public class FilmFragment extends Fragment {
         @Override
         protected void onPreExecute() { // Actions avant d’exe la requete
             super.onPreExecute();
-            progress.setMessage("Loading...");
+            progress.setMessage(getActivity().getResources().getString(R.string.Loading));
             progress.show();
         }
 
@@ -318,43 +269,8 @@ public class FilmFragment extends Fragment {
             if(db.isInFavoris(thisMovie.getId())) {
                 addFavoriteBtn.setVisibility(View.GONE);
             }
-            String url = "http://image.tmdb.org/t/p/w780/"+currentMovie.getPoster_path();
-            Picasso.with(getActivity()).load(url).into(filmImage);
-            // Set background
-            final String urlBack = "http://image.tmdb.org/t/p/w780/"+currentMovie.getBackdrop_path();
-            layout.post(new Runnable() {
-                @Override
-                public void run() {
-                    Picasso.with(getActivity())
-                            .load(urlBack)
-                            .into(new Target() {
-                                @Override
-                                @TargetApi(16)
-                                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                                    int sdk = android.os.Build.VERSION.SDK_INT;
-                                    if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                                        layout.setBackgroundDrawable(new BitmapDrawable(bitmap));
-                                        layout.getBackground().setAlpha(65);
-                                    } else {
-                                        layout.setBackground(new BitmapDrawable(getResources(), bitmap));
-                                        layout.getBackground().setAlpha(65);
-                                    }
-                                }
-
-                                @Override
-                                public void onBitmapFailed(Drawable errorDrawable) {
-                                    // use error drawable if desired
-                                }
-
-                                @Override
-                                public void onPrepareLoad(Drawable placeHolderDrawable) {
-                                    // use placeholder drawable if desired
-                                }
-                            });
-                }
-            });
-
-
+            urlImage = "http://image.tmdb.org/t/p/w780/"+currentMovie.getPoster_path();
+            getMoviePoster(urlImage);
             getCast();
         }
     }

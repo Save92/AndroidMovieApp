@@ -58,6 +58,16 @@
     <string name="yes">Oui</string>
     <string name="no">Non</string>
 
+    <!-- Messages -->
+    <string name="AddDone">Ajouté à vos favoris</string>
+    <string name="Loading">Loading...</string>
+
+    <!-- Errors -->
+    <string name="AddFavorisError">Erreur lors de l\'ajout du favoris</string>
+    <string name="SearchEmptyInputsError">Au moins un critères doit être saisie</string>
+    <string name="SearchTwoInputsError">Un seul critère doit être saisie</string>
+    <string name="ConnexionError">Vérifié votre connexion</string>
+
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
