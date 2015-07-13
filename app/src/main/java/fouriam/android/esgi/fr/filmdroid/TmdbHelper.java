@@ -14,15 +14,8 @@ import java.util.Date;
 
 public class TmdbHelper {
 
-    /** Format for decoding JSON dates in string format. */
     private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
 
-    /**
-     * Create a {@link com.google.gson.GsonBuilder} and register all of the custom types needed in
-     * order to properly deserialize complex TMDb-specific types.
-     *
-     * @return Assembled GSON builder instance.
-     */
     public static GsonBuilder getGsonBuilder() {
         GsonBuilder builder = new GsonBuilder();
 

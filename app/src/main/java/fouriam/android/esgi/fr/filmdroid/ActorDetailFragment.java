@@ -11,9 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import fouriam.android.esgi.fr.filmdroid.entities.AppendToDiscoverResponse;
 
@@ -50,6 +53,9 @@ public class ActorDetailFragment extends Fragment {
     private TextView personBirthDay;
     private TextView personPlaceBirth;
     private ListView filmography;
+    private ImageView imagePerson;
+
+    private String urlImage;
 
     private OnFragmentInteractionListener mListener;
 
@@ -81,6 +87,7 @@ public class ActorDetailFragment extends Fragment {
         personBirthDay = (TextView) view.findViewById(R.id.personBirthdayText);
         personPlaceBirth = (TextView) view.findViewById(R.id.personPlaceBithText);
         filmography = (ListView) view.findViewById(R.id.filmographyList);
+        imagePerson = (ImageView) view.findViewById(R.id.imagePerson);
 
         goSearchActor();
 
@@ -94,6 +101,8 @@ public class ActorDetailFragment extends Fragment {
     public void goSearchFilmography() {
         new getPersonFilmography().execute(person.getId());
     }
+
+
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -159,21 +168,24 @@ public class ActorDetailFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Person currentPerson) {
-            progress.dismiss();
             personName.setText(currentPerson.getName());
             SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
             personBirthDay.setText(format.format(currentPerson.getBirthday()));
             personPlaceBirth.setText(currentPerson.getPlace_of_birth());
+
+           urlImage = "http://image.tmdb.org/t/p/h632/"+currentPerson.getProfile_path();
+            Log.v(TAG, urlImage);
+            Picasso.with(getActivity()).load(urlImage).into(imagePerson);
+            //goSearchImage();
             goSearchFilmography();
         }
     }
+
 
     private class getPersonFilmography extends AsyncTask<Integer, Void, MovieResultsPage> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progress.setMessage(getActivity().getResources().getString(R.string.Loading));
-            progress.show();
         }
 
         @Override
@@ -181,8 +193,7 @@ public class ActorDetailFragment extends Fragment {
             Tmdb tmdb = new Tmdb();
             tmdb.setApiKey("4718f1a9036a1c190dad9301f401fb25");
             DiscoverService discoverService = tmdb.discoverService();
-
-            return discoverService.discoverMovie(false, false, "en", 1, null, null, null, null, null, null, null, null, null, null, new AppendToDiscoverResponse(personId),null,null,null,null,null,null);
+            return discoverService.discoverMovie(false, false, getResources().getString(R.string.language), 1, null, null, null, null, null, null, null, null, null, null, new AppendToDiscoverResponse(personId),null,null,null,null,null,null);
         }
 
         @Override

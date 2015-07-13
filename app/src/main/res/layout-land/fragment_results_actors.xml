@@ -19,6 +19,6 @@
         android:id="@+id/resultsPersonList"
         android:layout_below="@+id/results_person_titleLabel"
         android:layout_centerHorizontal="true"
-        android:fadeScrollbars="false"/>>
+        android:fadeScrollbars="false"/>
 
 </RelativeLayout>

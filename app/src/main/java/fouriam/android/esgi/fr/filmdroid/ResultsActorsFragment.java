@@ -36,7 +36,6 @@ public class ResultsActorsFragment extends Fragment {
 
 
     public ResultsActorsFragment() {
-        // Required empty public constructor
     }
 
     @Override

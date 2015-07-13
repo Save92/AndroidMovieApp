@@ -161,14 +161,14 @@ public class FilmFragment extends Fragment {
 
     private class getCastForMovie extends AsyncTask<Integer, Void, Credits> {
         @Override
-        protected void onPreExecute() { // Actions avant d’exe la requete
+        protected void onPreExecute() {
             super.onPreExecute();
             progress.setMessage(getActivity().getResources().getString(R.string.Loading));
             progress.show();
         }
 
         @Override
-        protected Credits doInBackground(Integer... movieId) { // Exe en arriere plan
+        protected Credits doInBackground(Integer... movieId) {
             Tmdb tmdb = new Tmdb();
             tmdb.setApiKey("4718f1a9036a1c190dad9301f401fb25");
             MoviesService moviesService = tmdb.moviesService();
@@ -177,7 +177,7 @@ public class FilmFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(Credits currentCast) { // Action apres exe !
+        protected void onPostExecute(Credits currentCast) {
 
             String actors = "";
             String realisator = "";
@@ -221,27 +221,27 @@ public class FilmFragment extends Fragment {
 
     private class getMovieDetail extends AsyncTask<Integer, Void, Movie> {
         @Override
-        protected void onPreExecute() { // Actions avant d’exe la requete
+        protected void onPreExecute() {
             super.onPreExecute();
             progress.setMessage(getActivity().getResources().getString(R.string.Loading));
             progress.show();
         }
 
         @Override
-        protected Movie doInBackground(Integer... movieId) { // Exe en arriere plan
+        protected Movie doInBackground(Integer... movieId) {
             Tmdb tmdb = new Tmdb();
             tmdb.setApiKey("4718f1a9036a1c190dad9301f401fb25");
             MoviesService moviesService = tmdb.moviesService();
 
-            return moviesService.summary(movieId[0], "fr", null);
+            return moviesService.summary(movieId[0], getResources().getString(R.string.language), null);
         }
 
         @Override
-        protected void onPostExecute(Movie currentMovie) { // Action apres exe !
+        protected void onPostExecute(Movie currentMovie) {
             thisMovie = currentMovie;
 
             filmTitle.setText(currentMovie.getTitle());
-            SimpleDateFormat format = new SimpleDateFormat("MM-yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
             if (currentMovie.getRelease_date() != null) {
                 filmYear.setText(format.format(currentMovie.getRelease_date()));
             }

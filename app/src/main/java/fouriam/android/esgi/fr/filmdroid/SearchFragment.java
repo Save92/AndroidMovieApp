@@ -25,7 +25,6 @@ import fouriam.android.esgi.fr.filmdroid.services.SearchService;
 
 
 import fouriam.android.esgi.fr.filmdroid.Adapters.FilmAdapterFactory;
-import fouriam.android.esgi.fr.filmdroid.httpservice.FilmDroidService;
 import fouriam.android.esgi.fr.filmdroid.utils.ErrorsHandlerUtils;
 import fouriam.android.esgi.fr.filmdroid.utils.NetworkUtils;
 import retrofit.RestAdapter;
@@ -55,7 +54,6 @@ public class SearchFragment extends Fragment {
     private String savedActor;
 
     private Toast toast;
-    private FilmDroidService filmDroidService;
     private ProgressDialog progress;
 
     private OnFragmentInteractionListener mListener;
@@ -108,14 +106,6 @@ public class SearchFragment extends Fragment {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapterFactory(new FilmAdapterFactory())
                 .create();
-
-
-        filmDroidService = new RestAdapter.Builder()
-                .setEndpoint(FilmDroidService.ENDPOINT)
-                .setErrorHandler(new ErrorsHandlerUtils())
-                .setConverter(new GsonConverter(gson))
-                .build()
-                .create(FilmDroidService.class);
 
         toast = Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT);
         searchFilmTitle = (EditText) view.findViewById(R.id.searchByTitleText);

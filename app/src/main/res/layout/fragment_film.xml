@@ -1,10 +1,17 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<fouriam.android.esgi.fr.filmdroid.utils.VerticalScrollview
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context="fouriam.android.esgi.fr.filmdroid.FilmFragment"
-    android:background="@color/white"
-    android:id="@+id/backgroundBack">
-
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:fillViewport="true"
+    android:id="@+id/verticalScrollView"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:background="@color/white"
+        android:id="@+id/backgroundBack">
 
         <TextView
             android:layout_width="wrap_content"
@@ -85,7 +92,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:text=""
             android:id="@+id/nationnalityText"
             android:layout_alignParentRight="true"
@@ -181,6 +188,5 @@
             android:layout_toStartOf="@+id/filmsPageTitle"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/filmsPageTitle" />
-
-
-</RelativeLayout>
+    </RelativeLayout>
+</fouriam.android.esgi.fr.filmdroid.utils.VerticalScrollview>

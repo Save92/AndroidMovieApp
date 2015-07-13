@@ -1,20 +1,3 @@
-/*
- * Copyright 2012 Uwe Trottmann
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- */
-
 package fouriam.android.esgi.fr.filmdroid.entities;
 
 import java.io.Serializable;
@@ -27,7 +10,6 @@ public class Movie implements Serializable{
 
     private Boolean adult;
     private String backdrop_path;
-    private Collection belongs_to_collection;
     private Integer budget;
     private List<Genre> genres;
     private String homepage;
@@ -36,7 +18,6 @@ public class Movie implements Serializable{
     private String overview;
     private Double popularity;
     private String poster_path;
-    private List<ProductionCompany> production_companies;
     private List<ProductionCountry> production_countries;
     private Date release_date;
     private Integer revenue;
@@ -47,9 +28,6 @@ public class Movie implements Serializable{
     private Double vote_average;
     private Integer vote_count;
 
-    // Following are used with append_to_response
-    private Videos videos;
-    private Releases releases;
     private Credits credits;
     private MovieResultsPage similar;
 
@@ -79,14 +57,6 @@ public class Movie implements Serializable{
 
     public void setBackdrop_path(String backdrop_path) {
         this.backdrop_path = backdrop_path;
-    }
-
-    public Collection getBelongs_to_collection() {
-        return belongs_to_collection;
-    }
-
-    public void setBelongs_to_collection(Collection belongs_to_collection) {
-        this.belongs_to_collection = belongs_to_collection;
     }
 
     public Integer getBudget() {
@@ -151,14 +121,6 @@ public class Movie implements Serializable{
 
     public void setPoster_path(String poster_path) {
         this.poster_path = poster_path;
-    }
-
-    public List<ProductionCompany> getProduction_companies() {
-        return production_companies;
-    }
-
-    public void setProduction_companies(List<ProductionCompany> production_companies) {
-        this.production_companies = production_companies;
     }
 
     public List<ProductionCountry> getProduction_countries() {
@@ -231,22 +193,6 @@ public class Movie implements Serializable{
 
     public void setVote_count(Integer vote_count) {
         this.vote_count = vote_count;
-    }
-
-    public Videos getVideos() {
-        return videos;
-    }
-
-    public void setVideos(Videos videos) {
-        this.videos = videos;
-    }
-
-    public Releases getReleases() {
-        return releases;
-    }
-
-    public void setReleases(Releases releases) {
-        this.releases = releases;
     }
 
     public Credits getCredits() {
