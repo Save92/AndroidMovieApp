@@ -1,4 +1,3 @@
-
 package fouriam.android.esgi.fr.filmdroid.services;
 
 import fouriam.android.esgi.fr.filmdroid.entities.AppendToDiscoverResponse;

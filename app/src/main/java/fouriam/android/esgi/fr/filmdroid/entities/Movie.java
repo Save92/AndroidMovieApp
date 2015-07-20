@@ -22,7 +22,6 @@ public class Movie implements Serializable{
     private Date release_date;
     private Integer revenue;
     private Integer runtime;
-    private List<SpokenLanguage> spoken_languages;
     private String tagline;
     private String title;
     private Double vote_average;
@@ -153,14 +152,6 @@ public class Movie implements Serializable{
 
     public void setRuntime(Integer runtime) {
         this.runtime = runtime;
-    }
-
-    public List<SpokenLanguage> getSpoken_languages() {
-        return spoken_languages;
-    }
-
-    public void setSpoken_languages(List<SpokenLanguage> spoken_languages) {
-        this.spoken_languages = spoken_languages;
     }
 
     public String getTagline() {

@@ -1,8 +1,6 @@
 
 package fouriam.android.esgi.fr.filmdroid.entities;
 
-import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
-
 public class AppendToResponse {
 
     private final AppendToResponseItem[] items;
