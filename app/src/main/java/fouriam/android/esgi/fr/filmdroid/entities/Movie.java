@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Created by FPierre on 01/06/15.
+ */
 public class Movie implements Serializable{
 
     private Integer id;

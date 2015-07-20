@@ -3,6 +3,9 @@ package fouriam.android.esgi.fr.filmdroid.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Created by FPierre on 10/05/15.
+ */
 public class Person implements Serializable {
 
     private Integer id;

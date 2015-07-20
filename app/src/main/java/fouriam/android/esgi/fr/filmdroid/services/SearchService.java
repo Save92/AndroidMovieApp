@@ -6,6 +6,9 @@ import fouriam.android.esgi.fr.filmdroid.entities.PersonResultsPage;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
+/**
+ * Created by FPierre on 07/05/15.
+ */
 public interface SearchService {
 
     @GET("/search/movie")

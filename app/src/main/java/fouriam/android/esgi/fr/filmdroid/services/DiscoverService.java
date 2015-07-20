@@ -8,6 +8,13 @@ import retrofit.http.Query;
 
 import java.util.Date;
 
+/**
+ * Created by FPierre on 07/05/15.
+ *
+ * http://docs.themoviedb.apiary.io/#reference/discover
+ *
+ * Cherche directement lse films.
+ */
 public interface DiscoverService {
 
     @GET("/discover/movie")

@@ -12,7 +12,7 @@ public class AppendToResponse {
     }
 
     @Override
-    public String toString() {
+        public String toString() {
         if (items != null && items.length > 0) {
             StringBuffer sb = new StringBuffer();
             for (int i = 0; i < items.length ; i++) {

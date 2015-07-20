@@ -1,7 +1,7 @@
 package fouriam.android.esgi.fr.filmdroid.entities;
 
 /**
- * Created by PierreF on 20/06/15.
+ * Created by FPierre on 20/06/15.
  */
 public enum AppendToResponseItem {
 
