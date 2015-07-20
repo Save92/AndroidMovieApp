@@ -1,6 +1,8 @@
 
 package fouriam.android.esgi.fr.filmdroid.entities;
 
+import fouriam.android.esgi.fr.filmdroid.entities.AppendToResponseItem;
+
 public class AppendToResponse {
 
     private final AppendToResponseItem[] items;
